@@ -22,7 +22,7 @@ spec:
             claimName: cloud
       containers:
         - name: filebrowser-cloud
-          image: 'juankanh/k3s-filebrowser:latest'
+          image: 'juankanh/k3s-filebrowser:rpi'
           ports:
             - name: http
               containerPort: 8080
