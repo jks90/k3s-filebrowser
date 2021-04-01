@@ -1,0 +1,38 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: filebrowser-cloud
+  creationTimestamp: null
+  labels:
+    app: filebrowser-cloud
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: filebrowser-cloud
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: filebrowser-cloud
+    spec:
+      volumes:
+        - name: volume-1
+          persistentVolumeClaim:
+            claimName: cloud
+      containers:
+        - name: filebrowser-cloud
+          image: 'juankanh/k3s-filebrowser:latest'
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          env:
+            - name: FB_ROOT
+              value: /cloud
+          resources: {}
+          volumeMounts:
+            - name: volume-1
+              mountPath: /cloud
+  strategy: {}
+status: {}
